@@ -12,5 +12,5 @@
 return [
     'table_name' => 'el_system_settings',
 
-    'cache' => false,
+    'cache' => true,
 ];
