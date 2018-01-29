@@ -1,12 +1,19 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+/*
+ * This file is part of ibrand/setting.
+ *
+ * (c) iBrand <https://www.ibrand.cc>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2018/1/29
- * Time: 13:31
+ * Time: 13:31.
  */
 class SettingTest extends BaseTest
 {
@@ -14,54 +21,54 @@ class SettingTest extends BaseTest
     {
         //test string value.
         $setting = settings(['key' => 'value']);
-        $this->assertEquals(iBrand\Component\Setting\Models\SystemSetting::class, get_class($setting));
-        $this->assertEquals('key', $setting->key);
-        $this->assertEquals('value', $setting->value);
+        $this->assertSame(iBrand\Component\Setting\Models\SystemSetting::class, get_class($setting));
+        $this->assertSame('key', $setting->key);
+        $this->assertSame('value', $setting->value);
 
         //test 0 value.
         $setting0 = settings(['key0' => 0]);
-        $this->assertEquals(0, $setting0->value);
+        $this->assertSame(0, $setting0->value);
 
         //test "" string.
-        $setting1 = settings(['key1' => ""]);
-        $this->assertEquals("", $setting1->value);
+        $setting1 = settings(['key1' => '']);
+        $this->assertSame('', $setting1->value);
 
         //test array
         $setting2 = settings(['key2' => ['key1' => 'value1', 'key2' => 'value2']]);
-        $this->assertEquals(2, count($setting2->value));
-        $this->assertEquals(['key1' => 'value1', 'key2' => 'value2'], $setting2->value);
+        $this->assertSame(2, count($setting2->value));
+        $this->assertSame(['key1' => 'value1', 'key2' => 'value2'], $setting2->value);
 
         //test bool
         $setting3 = settings(['key3' => true]);
-        $this->assertEquals(true, $setting3->value);
+        $this->assertTrue($setting3->value);
 
         $setting4 = settings(['key4' => false]);
-        $this->assertEquals(false, $setting4->value);
+        $this->assertFalse($setting4->value);
     }
 
     public function testGet()
     {
         //test string value.
         $setting = settings(['key' => 'value']);
-        $this->assertEquals('value', settings('key'));
+        $this->assertSame('value', settings('key'));
         //test 0 value.
         $setting0 = settings(['key0' => 0]);
-        $this->assertEquals(0, settings('key0'));
+        $this->assertSame(0, settings('key0'));
 
         //test "" string.
-        $setting1 = settings(['key1' => ""]);
-        $this->assertEquals("", settings('key1'));
+        $setting1 = settings(['key1' => '']);
+        $this->assertSame('', settings('key1'));
 
         //test array
         $setting2 = settings(['key2' => ['key1' => 'value1', 'key2' => 'value2']]);
-        $this->assertEquals(2, count(settings('key2')));
-        $this->assertEquals(['key1' => 'value1', 'key2' => 'value2'],settings('key2'));
+        $this->assertSame(2, count(settings('key2')));
+        $this->assertSame(['key1' => 'value1', 'key2' => 'value2'], settings('key2'));
 
         //test bool
         $setting3 = settings(['key3' => true]);
-        $this->assertEquals(true, settings('key3'));
+        $this->assertTrue(settings('key3'));
 
         $setting4 = settings(['key4' => false]);
-        $this->assertEquals(false, settings('key4'));
+        $this->assertFalse(settings('key4'));
     }
 }
