@@ -20,6 +20,10 @@ if (!function_exists('settings')) {
             return app('system_setting');
         }
 
+		if (app()->runningInConsole()) {
+            return '';
+        }
+		
         if (is_string($key)) {
             return app('system_setting')->getSetting($key);
         }
