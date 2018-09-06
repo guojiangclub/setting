@@ -73,14 +73,20 @@ class CacheDecorator implements SettingInterface
     {
         $cacheKey = $this->key;
 
+        $data = [];
+
         if ($this->cache->has($cacheKey)) {
-            return $this->cache->get($cacheKey);
+            $data = $this->cache->get($cacheKey);
         }
 
-        $data = $this->repo->allToArray();
+        if (!$this->cache->has($cacheKey) || empty($data)) {
 
-        // Store in cache for next request
-        $this->cache->put($cacheKey, $data, 60);
+            $data = $this->repo->allToArray();
+
+            // Store in cache for next request
+            $this->cache->put($cacheKey, $data, 60);
+
+        }
 
         return $data;
     }
