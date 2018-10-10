@@ -19,8 +19,18 @@ class SettingTest extends BaseTest
 {
     public function testSet()
     {
+
+        $this->assertSame('', settings());
+        $this->assertSame('', settings('adc'));
+
+        $this->assertFalse(settings([]));
+        $this->assertSame('abc', settings('key_abc','abc'));
+        settings(['key_abc' => '123']);
+        $this->assertSame('123', settings('key_abc','abc'));
+
         //test string value.
         $setting = settings(['key' => 'value']);
+
         $this->assertSame(iBrand\Component\Setting\Models\SystemSetting::class, get_class($setting));
         $this->assertSame('key', $setting->key);
         $this->assertSame('value', $setting->value);
@@ -44,6 +54,11 @@ class SettingTest extends BaseTest
 
         $setting4 = settings(['key4' => false]);
         $this->assertFalse($setting4->value);
+
+        $setting5 = settings(['key4' => true]);
+        $this->assertTrue($setting5->value);
+
+
     }
 
     public function testGet()
@@ -70,5 +85,8 @@ class SettingTest extends BaseTest
 
         $setting4 = settings(['key4' => false]);
         $this->assertFalse(settings('key4'));
+
+
     }
+
 }

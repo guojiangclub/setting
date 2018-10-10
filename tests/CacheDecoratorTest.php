@@ -13,6 +13,7 @@ use iBrand\Component\Setting\Models\SystemSetting;
 use iBrand\Component\Setting\Repositories\CacheDecorator;
 use iBrand\Component\Setting\Repositories\EloquentSetting;
 
+
 class CacheDecoratorTest extends BaseTest
 {
     protected $setting;
@@ -81,5 +82,8 @@ class CacheDecoratorTest extends BaseTest
 
         $setting4 = $this->setting->setSetting(['key4' => false]);
         $this->assertFalse($this->setting->getSetting('key4'));
+
+
+
     }
 }

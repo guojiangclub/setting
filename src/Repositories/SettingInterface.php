@@ -27,7 +27,7 @@ interface SettingInterface
      * @param $key
      * @return mixed
      */
-    public function getSetting($key);
+    public function getSetting($key,$input=null);
 
     /**
      * @return mixed

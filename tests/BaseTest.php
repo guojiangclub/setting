@@ -11,6 +11,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+
 abstract class BaseTest extends Orchestra\Testbench\TestCase
 {
     use DatabaseMigrations;
@@ -42,4 +43,5 @@ abstract class BaseTest extends Orchestra\Testbench\TestCase
 
         $this->loadMigrationsFrom(__DIR__.'/database');
     }
+
 }

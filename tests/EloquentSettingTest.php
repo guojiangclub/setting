@@ -58,6 +58,10 @@ class EloquentSettingTest extends BaseTest
 
         $setting4 = $this->setting->setSetting(['key4' => false]);
         $this->assertFalse($setting4->value);
+
+        $setting4 = $this->setting->setSetting([]);
+        $this->assertFalse($setting4);
+
     }
 
     public function testGet()
@@ -84,5 +88,12 @@ class EloquentSettingTest extends BaseTest
 
         $setting4 = $this->setting->setSetting(['key4' => false]);
         $this->assertFalse($this->setting->getSetting('key4'));
+
+        $this->assertSame('', $this->setting->getSetting('key88'));
+        $this->assertSame(88, $this->setting->getSetting('key88',88));
+
+        config()->set('ibrand.setting.cache',false);
+        $this->assertSame('iBrand\Component\Setting\Repositories\EloquentSetting', get_class(app('system_setting')));
+
     }
 }
