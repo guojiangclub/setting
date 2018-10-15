@@ -16,9 +16,9 @@ if (!function_exists('settings')) {
      */
     function settings($key = null,$value=null)
     {
-//        if (is_null($key)) {
-//            return app('system_setting');
-//        }
+        if (is_null($key)) {
+            return app('system_setting');
+        }
 
 //		if (app()->runningInConsole()) {
 //            return '';
