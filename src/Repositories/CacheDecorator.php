@@ -55,15 +55,17 @@ class CacheDecorator implements SettingInterface
         return $this->repo->setSetting($settings);
     }
 
+
     /**
      * @param $key
-     * @return string
+     * @param null $default
+     * @return mixed|string
      */
-    public function getSetting($key,$input=null)
+    public function getSetting($key, $default = null)
     {
         $allSettings = $this->allToArray();
 
-        $value=$input?$input:'';
+        $value = $default ? $default : '';
 
         return isset($allSettings[$key]) ? $allSettings[$key] : $value;
     }

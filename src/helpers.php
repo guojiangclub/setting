@@ -10,19 +10,18 @@
  */
 
 if (!function_exists('settings')) {
+
     /**
+     * get settings.
      * @param null $key
+     * @param null $value
      * @return \Illuminate\Foundation\Application|mixed|string
      */
-    function settings($key = null,$value=null)
+    function settings($key = null, $value=null)
     {
         if (is_null($key)) {
             return app('system_setting');
         }
-
-//		if (app()->runningInConsole()) {
-//            return '';
-//        }
 		
         if (is_string($key)) {
             return app('system_setting')->getSetting($key,$value);

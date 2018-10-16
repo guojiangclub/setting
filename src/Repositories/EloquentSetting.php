@@ -39,7 +39,7 @@ class EloquentSetting implements SettingInterface
      */
     public function setSetting(array $settings)
     {
-        if (count($settings)<=0) {
+        if (count($settings) <= 0) {
             return false;
         }
 
@@ -58,10 +58,10 @@ class EloquentSetting implements SettingInterface
 
     /**
      * @param $key
-     * @param null $input
+     * @param null $default
      * @return bool|mixed|string
      */
-    public function getSetting($key,$input=null)
+    public function getSetting($key, $default = null)
     {
         $value = $this->model->where('key', $key)->get(['value'])->first();
 
@@ -69,9 +69,8 @@ class EloquentSetting implements SettingInterface
             return $value->value;
         }
 
-        if(!is_null($input)){
-
-            return $input;
+        if (!is_null($default)) {
+            return $default;
         }
 
         return '';
