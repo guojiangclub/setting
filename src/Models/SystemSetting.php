@@ -42,11 +42,7 @@ class SystemSetting extends Model
      */
     public function getValueAttribute($value)
     {
-        if (!is_null($value)) {
-            return json_decode($value, true);
-        }
-
-        return '';
+        return json_decode($value, true);
     }
 
     /**

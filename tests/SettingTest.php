@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+use iBrand\Component\Setting\Repositories\SettingInterface;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -85,7 +87,15 @@ class SettingTest extends BaseTest
         $setting4 = settings(['key4' => false]);
         $this->assertFalse(settings('key4'));
 
+    }
 
+    public function testHelpers()
+    {
+        $result = settings();
+        $this->assertInstanceOf(SettingInterface::class,$result);
+
+        $result = settings(app(SettingInterface::class));
+        $this->assertEquals('',$result);
     }
 
 }
