@@ -52,7 +52,12 @@ class CacheDecorator implements SettingInterface
 
         $this->cache->forget($cacheKey);
 
-        return $this->repo->setSetting($settings);
+        $result = $this->repo->setSetting($settings);
+
+        $this->cache->put($cacheKey, $this->repo->allToArray(), config('ibrand.setting.minute'));
+
+        return $result;
+
     }
 
 
@@ -77,20 +82,9 @@ class CacheDecorator implements SettingInterface
     {
         $cacheKey = $this->key;
 
-        $data = [];
-
-        if ($this->cache->has($cacheKey)) {
-            $data = $this->cache->get($cacheKey);
-        }
-
-        if (!$this->cache->has($cacheKey) || empty($data)) {
-
-            $data = $this->repo->allToArray();
-
-            // Store in cache for next request
-            $this->cache->put($cacheKey, $data, 60);
-
-        }
+        $data = $this->cache->remember($cacheKey, config('ibrand.setting.minute'), function () {
+            return $this->repo->allToArray();
+        });
 
         return $data;
     }
