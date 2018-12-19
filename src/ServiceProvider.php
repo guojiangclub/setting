@@ -72,4 +72,12 @@ class ServiceProvider extends LaravelServiceProvider
     {
         return $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
+	
+	/**
+     * @return array
+     */
+    public function provides()
+    {
+        return [SettingInterface::class, 'system_setting'];
+    }
 }
