@@ -33,12 +33,10 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->registerMigrations();
-        }
+        $this->registerMigrations();
 
         $this->publishes([
-            __DIR__.'/config.php' => config_path('ibrand/setting.php'),
+            __DIR__ . '/config.php' => config_path('ibrand/setting.php'),
         ]);
     }
 
@@ -49,7 +47,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         // merge configs
         $this->mergeConfigFrom(
-            __DIR__.'/config.php', 'ibrand.setting'
+            __DIR__ . '/config.php', 'ibrand.setting'
         );
 
         $this->app->singleton(SettingInterface::class, function ($app) {
@@ -70,10 +68,10 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerMigrations()
     {
-        return $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        return $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
-	
-	/**
+
+    /**
      * @return array
      */
     public function provides()
