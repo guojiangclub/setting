@@ -14,13 +14,14 @@ class CreateSystemSettingTable extends Migration
     public function up()
     {
         $table = config('ibrand.setting.table_name');
-
-        Schema::create($table, function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('key')->index();
-            $table->text('value');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable($table)) {
+            Schema::create($table, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('key')->index();
+                $table->text('value');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
