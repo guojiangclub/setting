@@ -31,9 +31,9 @@ class SystemSetting extends Model
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
         $this->setTable(config('ibrand.setting.table_name'));
+
+        parent::__construct($attributes);
     }
 
     /**
